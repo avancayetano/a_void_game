@@ -1,0 +1,26 @@
+{
+    "topscorers": {
+        "1": {
+            "name": "A",
+            "score": "50"
+        },
+        "2": {
+            "name": "B",
+            "score": "40"
+        },
+        "3": {
+            "name": "C",
+            "score": "30"
+        },
+        "4": {
+            "name": "D",
+            "score": "20"
+        },
+        "5": {
+            "name": "E",
+            "score": "10"
+        }
+    },
+    "history": {
+    }
+}
