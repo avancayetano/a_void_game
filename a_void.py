@@ -106,13 +106,12 @@ class Stars(pygame.sprite.Sprite):
 	def __init__(self):
 		pygame.sprite.Sprite.__init__(self)
 
-		self.radius = random.randrange(2,10)
+		self.side = random.randrange(2,10)
 		self.color = [random.randrange(150, 256),random.randrange(150, 256),
 			random.randrange(150, 256), 150]
-		self.sprite_surface = pygame.Surface((self.radius * 2, self.radius * 2),
+		self.sprite_surface = pygame.Surface((self.side * 2, self.side * 2),
 			pygame.SRCALPHA, 32).convert_alpha()
-		pygame.draw.circle(self.sprite_surface, self.color, (self.radius, 
-			self.radius), self.radius)
+		self.sprite_surface.fill(self.color)
 		self.rect = self.sprite_surface.get_rect()
 		self.rect.topleft = (random.randrange(WINDOW_WIDTH),
 			random.randrange(WINDOW_HEIGHT))
@@ -126,23 +125,20 @@ class Stars(pygame.sprite.Sprite):
 			random.randrange(150, 256), 255]
 		if dead:
 			self.color[3] = 150
-		self.radius = random.randrange(2,10)
+		self.side = random.randrange(2,10)
 
 		self.rect.topleft = (random.randrange(WINDOW_WIDTH),
-			random.randrange(-4 * self.radius, -2 * self.radius))
-		self.sprite_surface = pygame.Surface((self.radius * 2, self.radius * 2),
+			random.randrange(-4 * self.side, -2 * self.side))
+		self.sprite_surface = pygame.Surface((self.side * 2, self.side * 2),
 			pygame.SRCALPHA, 32).convert_alpha()
-		pygame.draw.circle(self.sprite_surface, self.color, (self.radius, 
-			self.radius), self.radius)
+		self.sprite_surface.fill(self.color)
 
 	def change_color(self):
 		if self.color[3] == 255:
 			self.color[3] = 150
 		else:
 			self.color[3] = 255
-		pygame.draw.circle(self.sprite_surface, self.color, (self.radius, 
-			self.radius), self.radius)
-
+		self.sprite_surface.fill(self.color)
 
 class Antimatter(pygame.sprite.Sprite):
 	def __init__(self, coordinate, antimatter_max_radius, no_of_antimatters):
@@ -189,10 +185,18 @@ class Antimatter(pygame.sprite.Sprite):
 	def change_direction(self, collided):
 		if (self.rect.top < 0) or (self.rect.bottom > WINDOW_HEIGHT):
 			self.direction_y = - self.direction_y
+			if self.rect.top < 0:
+				self.rect.top = 0
+			else:
+				self.rect.bottom = WINDOW_HEIGHT
 
 
 		if ((self.rect.left < 0) or self.rect.right > WINDOW_WIDTH):
 			self.direction_x = - self.direction_x
+			if self.rect.left < 0:
+				self.rect.left = 0
+			else:
+				self.rect.right = WINDOW_WIDTH
 
 		if collided:
 			temp_direction_x = self.direction_x
@@ -230,8 +234,6 @@ class Matter(pygame.sprite.Sprite):
 		self.color = color
 		pygame.draw.circle(self.sprite_surface, self.color, (self.radius, 
 			self.radius), self.radius)
-
-
 
 stars  =  pygame.sprite.Group()
 antimatters = pygame.sprite.Group()
@@ -288,7 +290,6 @@ matter_cont.add(matter)
 running = True
 clock = pygame.time.Clock()
 username_valid = False
-# WINDOW.fill(WINDOW_COLOR)
 
 while running:
 	clicked = pygame.mouse.get_pressed()
