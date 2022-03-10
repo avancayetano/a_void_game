@@ -1,9 +1,7 @@
 # a_void_game
 Avoid-other-particles game
 
-Music used:
-
-
+# Music used:
 
 "Odyssey"
 
