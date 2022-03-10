@@ -1,11 +1,6 @@
 # A_VOID
 # BY: avan
 
-# FONT SOURCE:  https://www.1001fonts.com
-
-# FONT STYLE: Good Times Regular by Raymond Larabie
-
-# NEW PHYSICS COLLISION
 """
 MUSIC:
 "Odyssey"
@@ -54,9 +49,8 @@ with open(file_path, 'r') as user_data:
 score = "0"
 username = "ENTER NAME AND SECTION"
 
-font_file_path = find_data_file("good_times_rg.ttf")
-font_obj = pygame.font.Font(font_file_path, 15)
-big_font_obj = pygame.font.Font(font_file_path, 30)
+font_obj = pygame.font.SysFont('arial', 15)
+big_font_obj = pygame.font.SysFont('arial', 30)
 
 menu_text_surface = font_obj.render('CLICK TO PLAY',
 	False, FONT_COLOR)
